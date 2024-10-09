@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Satisfacción - UMO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #0868e6, #2575fc); /* Fondo con gradiente */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            font-size: 28pt;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #0a8b8bfb;
+            font-weight: bold;
+        }
+        .header-text {
+            font-size: 16pt;
+            margin-bottom: 20px;
+            text-align: justify;
+            line-height: 1.5;
+            font-weight: normal;
+        }
+        .form-section {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fafafa;
+            transition: background-color 0.3s;
+        }
+        .form-section:hover {
+            background-color: #f0f0f0;
+        }
+        .form-group label {
+            font-size: 14pt;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: calc(100% - 24px); /* Asegura que se mantenga dentro del contenedor */
+            padding: 12px;
+            font-size: 14pt;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            resize: none; /* Evitar el redimensionamiento */
+            margin: 0 auto; /* Centrar */
+            display: block; /* Asegura que se comporte como un bloque */
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #07a5e4; /* Color del borde en foco */
+            box-shadow: 0 0 5px rgba(7, 164, 228, 0.5); /* Sombra en foco */
+            outline: none; /* Quitar el contorno por defecto */
+        }
+        .form-group textarea {
+            height: 100px; /* Altura fija para el textarea */
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .button-group button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 12px;
+            font-size: 14pt;
+            color: rgb(0, 0, 0);
+            background-color: #e5f3f5;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .button-group button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            border-radius: 8px;
+        }
+        .button-group button:hover {
+            background-color: #07a5e4; /* Color para hover */
+            transform: scale(1.05);
+        }
+        .button-group button.selected {
+            background-color: #00d48d; /* Color para el botón seleccionado */
+        }
+        .button-group button.selected::after {
+            transform: translateY(0);
+        }
+        .save-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16pt;
+            color: rgb(233, 235, 240);
+            background-color: #5e5454;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .save-button:hover {
+            background-color: #00c6d4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Encuesta de Satisfacción - UMO</div>
+        <div class="header-text">
+            Tu opinión es muy importante para nosotros. Te pedimos que dediques unos minutos para completar esta encuesta sobre los servicios de medicina ocupacional UMO. Tus respuestas nos ayudarán a mejorar y ofrecer un mejor apoyo a todos los empleados.
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label for="nombre">Nombre del empleado</label>
+                <input type="text" id="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>1. ¿Qué tan satisfecho/a estás con los servicios de medicina ocupacional que has recibido?</label>
+                <div class="button-group" data-question="1">
+                    <button type="button" onclick="selectOption(this, '1')">Muy Satisfecho/a</button>
+                    <button type="button" onclick="selectOption(this, '1')">Satisfecho/a</button>
+                    <button type="button" onclick="selectOption(this, '1')">Normal</button>
+                    <button type="button" onclick="selectOption(this, '1')">Insatisfecho/a</button>
+                    <button type="button" onclick="selectOption(this, '1')">Muy Insatisfecho/a</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>2. ¿Cómo calificarías la atención recibida por parte del personal de medicina ocupacional?</label>
+                <div class="button-group" data-question="2">
+                    <button type="button" onclick="selectOption(this, '2')">Excelente</button>
+                    <button type="button" onclick="selectOption(this, '2')">Buena</button>
+                    <button type="button" onclick="selectOption(this, '2')">Regular</button>
+                    <button type="button" onclick="selectOption(this, '2')">Mala</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>3. ¿Consideras que los servicios de medicina ocupacional son accesibles y fáciles de utilizar?</label>
+                <div class="button-group" data-question="3">
+                    <button type="button" onclick="selectOption(this, '3')">Muy Accesibles</button>
+                    <button type="button" onclick="selectOption(this, '3')">Accesibles</button>
+                    <button type="button" onclick="selectOption(this, '3')">Normal</button>
+                    <button type="button" onclick="selectOption(this, '3')">Poco Accesibles</button>
+                    <button type="button" onclick="selectOption(this, '3')">Nada Accesibles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>4. ¿Qué tan satisfecho/a estás con la comunicación sobre los servicios y programas de medicina ocupacional?</label>
+                <div class="button-group" data-question="4">
+                    <button type="button" onclick="selectOption(this, '4')">Muy Satisfecho/a</button>
+                    <button type="button" onclick="selectOption(this, '4')">Algo Suficiente</button>
+                    <button type="button" onclick="selectOption(this, '4')">Normal</button>
+                    <button type="button" onclick="selectOption(this, '4')">Poco Suficiente</button>
+                    <button type="button" onclick="selectOption(this, '4')">Nada Suficiente</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label for="mejoras">5. ¿Qué aspectos de la medicina ocupacional (UMO) crees que necesitan mejorar?</label>
+                <textarea id="mejoras" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label for="sugerencias">6. ¿Tienes alguna sugerencia o comentario adicional?</label>
+                <textarea id="sugerencias"></textarea>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>7. ¿Te gustaría recibir más información sobre programas de salud y bienestar?</label>
+                <div class="button-group" data-question="7">
+                    <button type="button" onclick="selectOption(this, '7')">Sí</button>
+                    <button type="button" onclick="selectOption(this, '7')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>8. ¿Te gustaría participar en futuras encuestas o grupos de enfoque sobre este tema?</label>
+                <div class="button-group" data-question="8">
+                    <button type="button" onclick="selectOption(this, '8')">Sí</button>
+                    <button type="button" onclick="selectOption(this, '8')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="save-button" type="submit">Enviar Encuesta</button>
+    </div>
+
+    <script>
+        function selectOption(button, questionNumber) {
+            const buttonGroup = button.parentElement;
+            const buttons = buttonGroup.querySelectorAll('button');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+            console.log("Seleccionaste: " + button.innerText + " para la pregunta " + questionNumber);
+        }
+    </script>
+</body>
+</html>
